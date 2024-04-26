@@ -92,7 +92,32 @@ function SignUpScreen(): React.JSX.Element {
         fontSize:15,
       }} >Welcome! Please fill in your information.</Text>
 
-      {/* Email */}
+      <Controller
+        control={control}
+        rules={{
+          required: 'Username is required',
+        }}
+        render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
+          <>
+              <TextInput
+                placeholder={'How you would like us call you'}
+                onBlur={onBlur}
+                secureTextEntry={true}
+                onChangeText={onChange}
+                value={value}
+                autoCapitalize="none"
+                style={[
+                  styles.inputField,
+                  {backgroundColor: theme.colors.foreground},
+                ]}
+              />
+            {error && (
+              <Text style = {{alignSelf: 'stretch' }}>{error.message || 'Error'}</Text>
+            )}
+          </>
+        )}
+        name="username"
+      />
       <Controller
         control={control}
         rules={{
@@ -103,7 +128,7 @@ function SignUpScreen(): React.JSX.Element {
         render={({field: {onChange, onBlur, value},fieldState: {error}}) => (
           <>
               <TextInput
-                placeholder={'Email'}
+                placeholder={'Your email address'}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -132,7 +157,7 @@ function SignUpScreen(): React.JSX.Element {
         render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
           <>
               <TextInput
-                placeholder={'password'}
+                placeholder={'Password'}
                 onBlur={onBlur}
                 secureTextEntry={true}
                 onChangeText={onChange}
@@ -210,7 +235,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    gap: 20,
+    gap: 25,
     alignItems: 'center',
   },
   signupButton: {
